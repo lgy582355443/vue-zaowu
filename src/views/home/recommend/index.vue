@@ -318,31 +318,10 @@ export default {
       }
     }
   }
-  // ::v-deep .baseLayer-main {
-  //   height: 100%;
-  //   .header-bar {
-  //     display: none;
-  //   }
-  //   .scroll-wapper {
-  //     height: 100%;
-  //     overflow: hidden;
-  //     .scroll-content {
-  //       padding: 0 0 80px;
-  //       overflow: hidden;
-  //     }
-  //   }
-  // }
   ::v-deep .baseLayer-main {
     height: 100%;
     .header-bar {
       display: none;
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 40px;
-      background-color: #354e44;
-      z-index: 999;
     }
     .scroll-wapper {
       height: 100%;

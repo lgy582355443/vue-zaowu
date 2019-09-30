@@ -166,6 +166,16 @@ export default {
           border-radius: 50%;
           background-color: #354e44;
         }
+        .designer {
+          position: absolute;
+          top: -20px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-position: 0 0;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
         .title {
           margin: 0 0 10px;
           font-size: 16px;
@@ -193,16 +203,6 @@ export default {
       .scroll-content {
         padding: 60px 0 80px;
         overflow: hidden;
-      }
-      .designer {
-        position: absolute;
-        top: -20px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-position: 0 0;
-        background-repeat: no-repeat;
-        background-size: contain;
       }
     }
   }
