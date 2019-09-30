@@ -75,7 +75,12 @@ export default {
   computed: {},
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {
+    //重新计算baseSroll
+    setTimeout(() => {
+      this.$refs.baseLayer.$scroll.refresh();
+    }, 500);
+  }
 };
 </script>
 <style lang="scss" scoped>
