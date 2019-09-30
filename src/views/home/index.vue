@@ -1,47 +1,33 @@
 <template>
   <div class="home-main">
-    <h1>这是HOME</h1>
-    <swiper :options="swiperOption" ref="mySwiper">
-      <!-- slides -->
-      <swiper-slide class="swp-item">I'm Slide 1</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 2</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 3</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 4</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 5</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 6</swiper-slide>
-      <swiper-slide class="swp-item">I'm Slide 7</swiper-slide>
-      <!-- Optional controls -->
-      <div class="swiper-pagination" slot="pagination"></div>
-      <div class="swiper-button-prev" slot="button-prev"></div>
-      <div class="swiper-button-next" slot="button-next"></div>
-      <div class="swiper-scrollbar" slot="scrollbar"></div>
-    </swiper>
+    <div class="header">
+      <div class="icon message"></div>
+      <div class="titel-box">
+        <router-link class="title-item" :to="{name:'recommend'}" tag="div">
+          推荐
+          <div class="line"></div>
+        </router-link>
+        <router-link class="title-item" :to="{name:'brand'}" tag="div">
+          品牌
+          <div class="line"></div>
+        </router-link>
+      </div>
+      <div class="icon-right">
+        <router-link class="icon sou" :to="{name:'search'}" tag="div"></router-link>
+        <div class="icon car"></div>
+      </div>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import "swiper/dist/css/swiper.css";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "Home",
-  components: {
-    swiper,
-    swiperSlide
-  },
+  components: {},
   props: {},
   data() {
-    return {
-      swiperOption: {
-        autoplay: true,
-        slidesPerView: 1.2,
-        spaceBetween: 10,
-        centeredSlides: true,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination"
-        }
-      },
-    };
+    return {};
   },
   watch: {},
   computed: {},
@@ -51,12 +37,72 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "@/assets/css/common/common.scss";
-.swp-item{
-  width: 100%;
-  height: 200px;
-  background-color: orange;
-  font-size: 20px;
-  color: white;
+.home-main {
+  height: 100%;
+  position: relative;
+  .header {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    z-index: 999;
+    .icon {
+      width: 30px;
+      height: 30px;
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      padding: 5px;
+      background-position: center;
+      &.message {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url(../../assets/imgs/icons/xx.png);
+      }
+      &.sou {
+        background-image: url(../../assets/imgs/icons/ss.png);
+      }
+      &.car {
+        background-image: url(../../assets/imgs/icons/car.png);
+      }
+    }
+    .icon-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      .icon {
+        float: left;
+      }
+    }
+    .titel-box {
+      display: flex;
+      width: 150px;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      .title-item {
+        box-sizing: border-box;
+        height: 100%;
+        padding: 10px 10px 0;
+        font-size: 16px;
+        color: white;
+        .line {
+          display: none;
+          width: 30px;
+          height: 3px;
+          margin-top: 8px;
+          background-color: #fff;
+          border-radius: 1.5px;
+        }
+        &.router-link-active .line {
+          display: block;
+        }
+      }
+    }
+  }
 }
 </style>
