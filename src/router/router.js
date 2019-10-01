@@ -7,6 +7,8 @@ import user from './user/user'
 import search from './home/search/search'
 import login from './login/login'
 import register from './login/register/register'
+import articleDesc from './discover/articleDesc/articleDesc'
+import goodsDetail from './discover/goodsDetail/goodsDetail'
 
 Vue.use(Router)
 
@@ -21,6 +23,8 @@ export default new Router({
     search,
     register,
     login,
+    articleDesc,
+    goodsDetail,
     {
       path: '*',
       redirect: '/home'

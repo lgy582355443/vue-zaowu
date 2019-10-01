@@ -151,10 +151,10 @@ export default {
   },
   created() {},
   mounted() {
-    //重新计算baseSroll
-    // setTimeout(() => {
-    //   this.$refs.baseLayer.$scroll.refresh();
-    // }, 100);
+    // 重新计算baseSroll
+    setTimeout(() => {
+      this.$refs.baseLayer.$scroll.refresh();
+    }, 100);
   },
   watch: {},
   computed: {},
@@ -166,7 +166,7 @@ export default {
   height: 100%;
   .banner {
     width: 100%;
-    height: 280px;
+    // height: 280px;
     .banner-img {
       display: block;
       width: 100%;

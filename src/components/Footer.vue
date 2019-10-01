@@ -2,8 +2,8 @@
   <div class="footer-main">
     <div class="footer">
       <router-link class="footer-icon icon-home" :to="{name:'home'}" tag="div"><p class="footer-title">首页</p></router-link>
-      <router-link class="footer-icon icon-classify" :to="{name:'classify'}" tag="div"><p class="footer-title">发现</p></router-link>
-      <router-link class="footer-icon icon-discover" :to="{name:'discover'}" tag="div"><p class="footer-title">分类</p></router-link>
+      <router-link class="footer-icon icon-classify" :to="{name:'classify'}" tag="div"><p class="footer-title">分类</p></router-link>
+      <router-link class="footer-icon icon-discover" :to="{name:'discover'}" tag="div"><p class="footer-title">发现</p></router-link>
       <router-link class="footer-icon icon-user" :to="{name:'user'}" tag="div"><p class="footer-title">我的</p></router-link>
     </div>
   </div>
