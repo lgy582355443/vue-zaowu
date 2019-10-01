@@ -24,7 +24,7 @@
               <div class="guide-item">忘记密码</div>
             </div>
           </div>
-          <div class="register">立即注册</div>
+          <router-link class="register" :to="{name:'register'}" tag="div">立即注册</router-link>
           <div class="third">
             <div class="line"></div>第三方登录
             <div class="line"></div>
