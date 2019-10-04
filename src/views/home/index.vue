@@ -14,7 +14,7 @@
       </div>
       <div class="icon-right">
         <router-link class="icon sou" :to="{name:'search'}" tag="div"></router-link>
-        <div class="icon car"></div>
+        <router-link class="icon car" :to="{name:'car'}" tag="div"></router-link>
       </div>
     </div>
     <router-view></router-view>

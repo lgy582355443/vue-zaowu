@@ -1,73 +1,210 @@
 <template>
   <div class="goods-main">
-    <div class="container">
-      <div class="title-box">
-        <div class="en-text">Cutting furniture</div>
-        <div class="title">
-          切割家具
-          <br />系列
-        </div>
-      </div>
-      <div class="desc">
-        <div class="height">
-          <div class="text">高度</div>
-          <div class="number">60</div>
-        </div>
-        <div class="area">
-          <div class="text">区域</div>
-          <div class="number">45</div>
-        </div>
-      </div>
-      <div class="dot1">
-        <div class="dot2">
-          <div class="dot3"></div>
-        </div>
-      </div>
-      <div class="goods-list">
-        <div class="goods-item">
-          <div class="goodsImg"></div>
-          <div class="detail-ritht">
-            <div class="goodsName">莲花吊灯</div>
-            <div class="en-text">by MacMaster</div>
-            <div class="color">
-              <div class="dot d1"></div>
-              <div class="dot d2"></div>
-              <div class="dot d3"></div>
+    <swiper class="outerSwiper" :options="outerSwiperOption" ref="outerSwiper">
+      <swiper-slide v-for="(item,index) in seriesList" :key="item.id">
+        <!-- <img class="bgImg" :src="item.url" alt=""> -->
+        <div :class="`container container${index}`" :style="`background-image:url(${item.url});`">
+          <div class="title-box">
+            <div class="en-text">{{item.enText}}</div>
+            <div class="title">
+              {{item.title}}
+              <br />系列
             </div>
-            <div class="price">¥560</div>
+          </div>
+          <div class="desc">
+            <div class="height">
+              <div class="text">高度</div>
+              <div class="number">{{item.height}}</div>
+            </div>
+            <div class="area">
+              <div class="text">区域</div>
+              <div class="number">{{item.area}}</div>
+            </div>
+          </div>
+          <div class="dot1">
+            <div class="dot2">
+              <div class="dot3"></div>
+            </div>
+          </div>
+          <div class="goods-list">
+            <swiper class="innerSwiper" :options="innerSwiperOption" :ref="`innerSwiper${index}`">
+              <swiper-slide v-for="citem in item.goodsList" :key="citem.id">
+                <div class="goods-item">
+                  <div class="goodsImg" :style="`background-image:url(${citem.url});`"></div>
+                  <div class="detail-ritht">
+                    <router-link
+                      class="goodsName"
+                      :to="{name:'goodsDetail'}"
+                      tag="div"
+                    >{{citem.goodsTitle}}</router-link>
+                    <div class="en-text">{{citem.enText}}</div>
+                    <div class="color">
+                      <div class="dot d1"></div>
+                      <div class="dot d2"></div>
+                      <div class="dot d3"></div>
+                    </div>
+                    <div class="price">¥{{citem.price}}</div>
+                  </div>
+                </div>
+              </swiper-slide>
+            </swiper>
           </div>
         </div>
-      </div>
-    </div>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
 <script>
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "Goods",
-  components: {},
+  components: {
+    swiper,
+    swiperSlide
+  },
   props: {},
   data() {
-    return {};
+    const that = this;
+    return {
+      outerIndex: 0,
+      innerIndex: 0,
+      outerSwiperOption: {
+        autoplay: false,
+        direction: "vertical",
+        on: {
+          slideChangeTransitionEnd: function() {
+            that.outerIndex = this.realIndex; //切换结束时，告诉我现在是第几个slide
+          }
+        }
+      },
+      innerSwiperOption: {
+        autoplay: false,
+        direction: "horizontal",
+        slidesPerView: 1.25,
+        // spaceBetween: 0,
+        centeredSlides: true,
+        // loop: true
+        on: {
+          slideChangeTransitionEnd: function() {
+            that.innerIndex = this.realIndex; //切换结束时，告诉我现在是第几个slide
+          }
+        }
+      },
+      seriesList: [
+        {
+          id: 11,
+          title: "切割家居",
+          enText: "Cutting furniture",
+          height: 60,
+          area: 45,
+          url: require("../../../assets/imgs/discover-goods/bj1.png"),
+          goodsList: [
+            {
+              id: 111,
+              goodsTitle: "切割式床头柜",
+              enText: "by Adrianne Ho",
+              price: 560,
+              position: -300,
+              url: require("../../../assets/imgs/discover-goods/d1.png")
+            },
+            {
+              id: 112,
+              goodsTitle: "切割式床头柜",
+              enText: "by Adrianne Ho",
+              price: 250,
+              position: -580,
+              url: require("../../../assets/imgs/discover-goods/d2.png")
+            }
+          ]
+        },
+        {
+          id: 21,
+          title: "简约木式家具",
+          enText: "Simple wooden type",
+          height: 60,
+          area: 45,
+          url: require("../../../assets/imgs/discover-goods/bj2.png"),
+          goodsList: [
+            {
+              id: 212,
+              goodsTitle: "简约木式椅子",
+              enText: "by Selena",
+              price: 250,
+              position: 0,
+              url: require("../../../assets/imgs/discover-goods/y2.png")
+            },
+            {
+              id: 211,
+              goodsTitle: "简约木式桌",
+              enText: "by Selena ",
+              price: 560,
+              position: -250,
+              url: require("../../../assets/imgs/discover-goods/y1.png")
+            }
+          ]
+        }
+      ]
+    };
   },
-  watch: {},
-  computed: {},
-  methods: {},
+  watch: {
+    outerIndex() {
+      let bgImg = document.querySelector(".container" + this.outerIndex);
+      this.innerSwiperOption.on.slideChangeTransitionEnd();
+      // console.log(this.$refs[`innerSwiper${this.outerIndex}`]);
+      bgImg.style.backgroundPosition = `${this.bgPosition}px`;
+    },
+    innerIndex() {
+      let bgImg = document.querySelector(".container" + this.outerIndex);
+      bgImg.style.backgroundPosition = `${this.bgPosition}px`;
+    }
+  },
+  computed: {
+    bgPosition() {
+      return this.seriesList[this.outerIndex].goodsList[this.innerIndex]
+        .position;
+    }
+  },
+  methods: {
+    initBgPosition() {
+      let bgImg = document.querySelector(".container" + this.outerIndex);
+      bgImg.style.backgroundPosition = `${this.bgPosition}px`;
+    }
+  },
   created() {},
-  mounted() {}
+  mounted() {
+    this.initBgPosition();
+  }
 };
 </script>
 <style lang="scss" scoped>
 .goods-main {
   width: 100%;
   height: 100%;
-  .container {
-    position: relative;
+  .outerSwiper {
     width: 100%;
     height: 100%;
-    background: url("../../../assets/imgs/discover-goods/b1.png") no-repeat;
+  }
+  .bgImg {
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1;
+  }
+  .container {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    transition: 0.8 all;
+    // background-position: -40px 0px;
+    // background-position: center;
+    z-index: 888;
     .title-box {
       position: absolute;
       left: 30px;
@@ -137,11 +274,13 @@ export default {
     }
     .goods-list {
       position: absolute;
-      right: 60px;
+      right: 0px;
       bottom: 90px;
+      width: 330px;
+      height: 120px;
       .goods-item {
         width: 250px;
-        height: 140px;
+        height: 120px;
         background-color: #fff;
         border-radius: 5px;
         .goodsImg {
@@ -203,3 +342,4 @@ export default {
   }
 }
 </style>
+

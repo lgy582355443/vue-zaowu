@@ -1,6 +1,6 @@
 <template>
   <div class="discover-main">
-    <div class="header">
+    <div class="discover-header">
       <div class="title-box">
         <router-link class="title-item article-title" :to="{name:'article'}" tag="div">
           精选好文
@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import baselayer from "@/components/BaseLayer";
 export default {
   name: "Discovuer",
   components: {},
@@ -36,7 +35,8 @@ export default {
 .discover-main {
   height: 100%;
   background: #354e44;
-  .header {
+  overflow: hidden;
+  .discover-header {
     position: fixed;
     left: 0;
     top: 0;
@@ -67,20 +67,6 @@ export default {
         &.router-link-active .line {
           display: block;
         }
-      }
-    }
-  }
-  ::v-deep .baseLayer-main {
-    height: 100%;
-    .header-bar {
-      display: none;
-    }
-    .scroll-wapper {
-      height: 100%;
-      overflow: hidden;
-      .scroll-content {
-        padding: 40px 0 0px;
-        overflow: hidden;
       }
     }
   }

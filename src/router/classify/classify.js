@@ -4,5 +4,6 @@ export default {
     component: () => import(/* webpackChunkName: "classify" */ '../../views/classify/index.vue'),
     meta: {
         footShow: true
-    }
+    },
 }
+

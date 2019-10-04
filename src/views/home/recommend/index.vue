@@ -85,14 +85,19 @@ export default {
         }
       },
       brandSwiperOption: {
-        slidesPerView: 3
+        autoplay: false,
+        // slidesPerView: "auto",
+        slidesPerView: 3,
+        // spaceBetween: 10,
+        // centeredSlides: true,
+        loop: false
       },
       featureSwiperOption: {
         autoplay: false,
         slidesPerView: 1.2,
         spaceBetween: 10,
         centeredSlides: true,
-        loop: true
+        loop: false
       },
       bannerList: [
         {
@@ -211,6 +216,10 @@ export default {
       box-sizing: border-box;
       width: 100%;
       padding: 0 10px;
+      // ::v-deep .swiper-slide {
+      //   width: 100px;
+      //   height: 140px;
+      // }
       .brand-item {
         position: relative;
         width: 100px;

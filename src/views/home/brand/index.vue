@@ -130,11 +130,11 @@ export default {
     top: 0;
     height: 60px;
     width: 100%;
-    // background: url(../../../assets/imgs/home-brand/topbg.png) no-repeat center;
-    background-color: black;
+    background: url("../../../assets/imgs/home-brand/topbg.png") no-repeat
+      center / cover;
     border-radius: 0 0 20px 20px;
-    background-size: 100% 60px;
-    z-index: 998;
+    box-shadow: 0 4px 10px 0 rgba(122, 98, 75, .5);
+    z-index: 99;
   }
   .brand-list {
     width: 330px;

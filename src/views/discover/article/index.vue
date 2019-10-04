@@ -1,7 +1,7 @@
 <template>
-  <baselayer ref="baseLayer">
-    <template v-slot:default>
-      <div class="article-main">
+  <div class="article-main">
+    <baselayer ref="baseLayer">
+      <template v-slot:default>
         <div class="iconLinkList">
           <router-link class="icon-item light" :to="{name:'light'}" tag="div"></router-link>
           <router-link class="icon-item wardrobe" :to="{name:'wardrobe'}" tag="div"></router-link>
@@ -9,9 +9,9 @@
           <router-link class="icon-item decoration" :to="{name:'decoration'}" tag="div"></router-link>
         </div>
         <router-view></router-view>
-      </div>
-    </template>
-  </baselayer>
+      </template>
+    </baselayer>
+  </div>
 </template>
 <script>
 import baselayer from "@/components/BaseLayer";
@@ -28,13 +28,21 @@ export default {
   computed: {},
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
+  beforeRouteUpdate(to, from, next) {
+    // 重新计算baseSroll
+    setTimeout(() => {
+      this.$refs.baseLayer.$scroll.refresh();
+    }, 100);
+    next();
+  }
 };
 </script>
 <style lang="scss" scoped>
 .article-main {
   height: 100%;
-  padding-bottom:80px; 
+  padding-bottom: 80px;
+  margin-top: 40px;
   background-color: #f1ece7;
   border-radius: 20px;
   .iconLinkList {
@@ -89,6 +97,20 @@ export default {
         transform: scale(1.1);
         background: #354e44 url(../../../assets/imgs/icons/bspz.png) no-repeat
           center / 20px;
+      }
+    }
+  }
+  ::v-deep .baseLayer-main {
+    height: 100%;
+    .header-bar {
+      z-index: 888;
+    }
+    .scroll-wapper {
+      height: 100%;
+      overflow: hidden;
+      .scroll-content {
+        padding: 0px 0 100px;
+        overflow: hidden;
       }
     }
   }

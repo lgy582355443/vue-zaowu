@@ -3,6 +3,7 @@
     <baselayer ref="baseLayer">
       <template v-slot:default>
         <div class="container">
+          <div class="gobick" @click="$router.go(-1)"></div>
           <img class="head-photo" src="../../assets/imgs/home-brand/logo.png" alt />
           <div class="login-form">
             <input
@@ -11,13 +12,15 @@
               v-model="login.userId"
               placeholder="请输入手机号/邮箱"
             />
-            <input
-              class="login-input userPassword"
-              type="password"
-              v-model="login.password"
-              placeholder="请输入密码"
-            />
-            <div class="icon eye"></div>
+            <div class="password-box">
+              <input
+                class="login-input userPassword"
+                :type="`${isShow?'text':'password'}`"
+                v-model="login.password"
+                placeholder="请输入密码"
+              />
+              <div :class="`eye ${isShow?' openEye':' closeEye'}`" @click="openPassword"></div>
+            </div>
             <div class="login-btn">登录</div>
             <div class="guide">
               <div class="guide-item">海外手机登录</div>
@@ -53,12 +56,21 @@ export default {
       login: {
         userId: "",
         password: ""
-      }
+      },
+      isShow: false
+      // eyeIcon: {
+      //   closeUrl: require("../../assets/imgs/icons/by.png"),
+      //   openUrl: require("../../assets/imgs/icons/ky.png")
+      // }
     };
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    openPassword() {
+      this.isShow = !this.isShow;
+    }
+  },
   created() {},
   mounted() {}
 };
@@ -68,6 +80,12 @@ export default {
   height: 100%;
   .container {
     width: 100%;
+    .gobick {
+      width: 25px;
+      height: 25px;
+      margin: 10px 0 0 10px;
+      background: url("../../assets/imgs/icons/lzjt.png") no-repeat center/cover;
+    }
     .head-photo {
       display: block;
       width: 100px;
@@ -103,14 +121,27 @@ export default {
             5px center / 20px 20px;
         }
       }
-      .eye {
-        position: absolute;
-        right: 65px;
-        top: 88px;
-        width: 30px;
-        height: 30px;
-        background: #e3dfda url("../../assets/imgs/icons/by.png") no-repeat
-          center / 25px;
+      .password-box {
+        position: relative;
+        width: 260px;
+        margin: 0 auto;
+        .eye {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          width: 30px;
+          height: 30px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 25px;
+          background-color: #e3dfda;
+          &.openEye {
+            background-image: url("../../assets/imgs/icons/ky.png");
+          }
+          &.closeEye {
+            background-image: url("../../assets/imgs/icons/by.png");
+          }
+        }
       }
       .login-btn {
         width: 260px;
@@ -160,27 +191,27 @@ export default {
         background-color: #dddddd;
       }
     }
-    .icon-list{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .icon-item{
-            width: 30px;
-            height: 30px;
-            margin: 0 15px;
-            background-position: center;
-            background-size: contain;
-            background-repeat: no-repeat;
-            &.qq{
-                background-image: url(../../assets/imgs/icons/QQ.png);
-            }
-            &.wb{
-                background-image: url(../../assets/imgs/icons/wb.png);
-            }
-            &.wx{
-                background-image: url(../../assets/imgs/icons/wx.png);
-            }
+    .icon-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon-item {
+        width: 30px;
+        height: 30px;
+        margin: 0 15px;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        &.qq {
+          background-image: url(../../assets/imgs/icons/QQ.png);
         }
+        &.wb {
+          background-image: url(../../assets/imgs/icons/wb.png);
+        }
+        &.wx {
+          background-image: url(../../assets/imgs/icons/wx.png);
+        }
+      }
     }
   }
   ::v-deep .baseLayer-main {
